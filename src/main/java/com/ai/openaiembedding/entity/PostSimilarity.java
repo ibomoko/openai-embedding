@@ -28,4 +28,10 @@ public class PostSimilarity {
     @Column(name = "cos_similarity")
     private Double cosSimilarity;
 
+    @Column(name = "first_embedding_vector")
+    private String firstEmbeddingVector;
+
+    @Column(name = "second_embedding_vector")
+    private String secondEmbeddingVector;
+
 }

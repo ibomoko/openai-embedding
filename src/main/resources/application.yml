@@ -16,3 +16,8 @@ spring:
     default-schema: ${OPENAI_EMBEDDING_DB_SCHEMA}
     liquibase-schema: ${OPENAI_EMBEDDING_DB_SCHEMA}
     enabled: true
+
+openai:
+  api-key: ${OPENAI_API_KEY}
+  embedding-model: text-embedding-ada-002
+  embedding-url: https://api.openai.com/v1/embeddings
