@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+
+<changeSet id="2023-07-21-create_topics_table" author="Ibrahim Ahmadov">
+        <createTable tableName="topics">
+            <column name="id" type="char(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="create_date" type="timestamp without time zone"/>
+            <column name="name" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2023-07-21-create_topic_posts_table" author="Ibrahim Ahmadov">
+        <sql>
+            CREATE EXTENSION vector;
+
+            CREATE TABLE topic_posts (
+            id char(32) primary key not null,
+            topic_id char(32),
+            post_content text,
+            embedding_vector vector
+            );
+
+            ALTER TABLE topic_posts ADD CONSTRAINT fk_topic_posts_topics FOREIGN KEY (topic_id) REFERENCES topics (id);
+        </sql>
+    </changeSet>
+    
+    <changeSet id="2023-07-21-create_post_similarities_table" author="Ibrahim Ahmadov">
+        <createTable tableName="post_similarities">
+            <column name="id" type="char(32)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_post_id" type="char(32)"/>
+            <column name="second_post_id" type="char(32)"/>
+            <column name="cos_similarity" type="numeric"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

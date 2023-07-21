@@ -1,1 +1,18 @@
-
+spring:
+  datasource:
+    url: jdbc:postgresql://${OPENAI_EMBEDDING_DB_HOST}:${OPENAI_EMBEDDING_DB_PORT}/${OPENAI_EMBEDDING_DB_NAME}?currentSchema=${OPENAI_EMBEDDING_DB_SCHEMA}
+    username: ${OPENAI_EMBEDDING_DB_USERNAME}
+    password: ${OPENAI_EMBEDDING_DB_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: embedding
+    hibernate:
+      ddl-auto: none
+    open-in-view:
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
+    default-schema: ${OPENAI_EMBEDDING_DB_SCHEMA}
+    liquibase-schema: ${OPENAI_EMBEDDING_DB_SCHEMA}
+    enabled: true
