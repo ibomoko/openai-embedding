@@ -42,4 +42,10 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="2023-07-21-add_columns_to_post_similarities_table" author="Ibrahim Ahmadov">
+        <sql>
+            ALTER TABLE post_similarities ADD COLUMN first_embedding_vector vector, ADD COLUMN second_embedding_vector vector;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
